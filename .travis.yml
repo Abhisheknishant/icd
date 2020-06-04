@@ -33,7 +33,9 @@ os:
 dist:
   - xenial
   - bionic
-
+arch:
+    - amd64
+    - arm64
 r:
   - devel
   - release
@@ -151,6 +153,20 @@ jobs:
       r: devel
       fortran: true
     - os: linux
+      r: release
+      dist: bionic
+      compiler: clang
+      pandoc: true
+      latex: true
+      env:
+        - ICD_MINI_BENCH=true
+        - ICD_COVERAGE=true
+        - ICD_TEST_SLOW=true
+        - ICD_TRAVIS_HEAVY=true
+      r_build_args: --resave-data=yes
+      r_check_args: --no-codoc --no-manual
+    - os: linux
+      arch: arm64
       r: release
       dist: bionic
       compiler: clang
